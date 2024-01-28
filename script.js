@@ -13,19 +13,19 @@ const operator_buttons = document.querySelectorAll('.operator');
 const equals_button = document.querySelector('.equals');
 
 function add() {
-    return parseFloat(num1) + parseFloat(num2);
+    return (parseFloat(num1) + parseFloat(num2)).toFixed(3);
 }
 
 function subtract() {
-    return parseFloat(num1) - parseFloat(num2);
+    return (parseFloat(num1) - parseFloat(num2)).toFixed(3);
 }
 
 function multiply() {
-    return parseFloat(num1) * parseFloat(num2);
+    return (parseFloat(num1) * parseFloat(num2)).toFixed(3);
 }
 
 function divide() {
-    return parseFloat(num1) / parseFloat(num2);
+    return (parseFloat(num1) / parseFloat(num2)).toFixed(3);
 }
 
 function operate() {
@@ -66,7 +66,7 @@ function addNumber(num) {
         cur_number_screen.textContent = num1;
     } else {
         num2 += num;
-        last_number_screen.textContent = `${num1} ${operator}`;
+        last_number_screen.textContent = `${num1} ${operator} `;
         cur_number_screen.textContent = num2;
     }
     if (num == '.') {
@@ -76,8 +76,11 @@ function addNumber(num) {
 
 operator_buttons.forEach((operator_button) => {
     operator_button.addEventListener('click', (e) => {
+        if (num1 != '' && num2 != '') {
+            equals_button.click();
+        }
         operator = e.target.textContent;
-        last_number_screen.textContent = `${num1} ${operator}`;
+        last_number_screen.textContent = `${num1} ${operator} `;
         isNumFloat = false;
     });
 });
@@ -87,7 +90,7 @@ equals_button.addEventListener('click', () => {
         alert("C'mon Man");
         return;
     }
-    last_number_screen.textContent = `${num1} ${operator} ${num2} =`;
+    last_number_screen.textContent = `${num1} ${operator} ${num2} = `;
     const res = operate();
     cur_number_screen.textContent = res;
     num1 = res;
@@ -110,7 +113,7 @@ decimal_button.addEventListener('click', (e) => {
 })
 
 clear_button.addEventListener('click', () => {
-    cur_number_screen.textContent = '';
+    cur_number_screen.textContent = '0';
     last_number_screen.textContent = '';
     num1 = '';
     num2 = '';
